@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉ dành cho Diệu Thương</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="preload">
+    <div class="bubbles" id="bubbles"></div>
+    <div class="bg-hearts" id="bgHearts"></div>
+
+    <div class="container">
+        <div class="calculator-screen" id="calculatorScreen">
+            <div class="input-avatar-row">
+                <div class="avatar-square">
+                    <img id="avatarImg" src="avatar.jpg" alt="Avatar" style="display:block;" onerror="this.src='https://via.placeholder.com/150/ffb6c1/ff69b4?text=Anh+Xinh'">
+                </div>
+                <div class="input-and-keypad">
+                    <div class="calculator-title">Nhập ngày sinh (ddmmyyyy)</div>
+                    <input type="password" class="display" id="display" placeholder="••••••••" maxlength="8" readonly>
+                    <div class="buttons">
+                        <button class="btn btn-number" onclick="appendToDisplay('1')">1</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('2')">2</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('3')">3</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('4')">4</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('5')">5</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('6')">6</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('7')">7</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('8')">8</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('9')">9</button>
+                        <button class="btn btn-clear" onclick="clearDisplay()">C</button>
+                        <button class="btn btn-number" onclick="appendToDisplay('0')">0</button>
+                        <button class="btn btn-enter" onclick="checkPassword()">❤️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="myAudio" loop>
+        <source src="thienly.mp3" type="audio/mp3">
+    </audio>
+
+    <script src="lang.js"></script>
+    <script>
+        // Tự động phát nhạc khi chạm vào màn hình
+        let audioPlayed = false;
+        function playAudioOnFirstTouch() {
+            if (!audioPlayed) {
+                var audio = document.getElementById('myAudio');
+                if (audio) {
+                    audio.play().catch(function(error) {
+                        console.log("Cần tương tác để phát nhạc: " + error);
+                    });
+                    audioPlayed = true;
+                }
+            }
+        }
+        document.addEventListener('click', playAudioOnFirstTouch);
+        document.addEventListener('touchstart', playAudioOnFirstTouch);
+    </script>
+</body>
+</html>

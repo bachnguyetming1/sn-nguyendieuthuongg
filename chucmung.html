@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Diệu Thương</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS riêng cho trang chúc mừng */
+        body { overflow: hidden; }
+        .fireworks { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; }
+        .firework { position: absolute; width: 6px; height: 6px; border-radius: 50%; animation: fireworkExplode 2s ease-out infinite; }
+        @keyframes fireworkExplode {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(10); opacity: 0.6; }
+            100% { transform: scale(20); opacity: 0; }
+        }
+        .heart-images-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 5; }
+        .heart-img-scroll {
+            position: absolute; border-radius: 15px; object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            animation: scrollLeftToRight linear; opacity: 0.9;
+        }
+        @keyframes scrollLeftToRight {
+            0% { transform: translateX(-200px) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: translateX(-180px) scale(1); }
+            90% { opacity: 1; transform: translateX(calc(100vw + 50px)) scale(1); }
+            100% { transform: translateX(calc(100vw + 100px)) scale(0.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fireworks" id="fireworks"></div>
+    <div class="heart-images-container" id="heartImagesContainer"></div>
+
+    <div class="wishes-page" id="wishesPage">
+        <div class="main-title">
+            <h1 class="rainbow-text">💗 CHÚC MỪNG SINH NHẬT 💗</h1>
+            <div class="subtitle">Nguyễn Diệu Thương</div>
+        </div>
+        
+        <div class="birthday-card-section">
+            <div class="card-3d">
+                <div class="card-imgBox">
+                    <div class="card-bark"></div>
+                    <img src="anh_bia.jpg" alt="Birthday" onerror="this.src='https://via.placeholder.com/300x400/ffb6c1/ff69b4?text=Love+U'">
+                </div>
+                <div class="card-details">
+                    <h4>HAPPY BIRTHDAY</h4>
+                    <div style="text-align:left;">
+                        <p>“Chúc mừng sinh nhật chị</p>
+                        <p>Chúc chị lun vui vẻ, hạnh phúc</p>
+                        <p>Chúc chị chân cứng đá mềm, đường xa không mỏi đường đời an nhiên</p>
+                        <p>Dù sao thì: </p>
+                        <p>Tuổi mới chúc chị nhiều tất cả, happy birthdayyyy💕</p>
+                        
+                        <p style="margin-top:24px;text-align:right;font-style:italic;color:#c44569;font-size:16px;">
+                            Ký Tên<br>
+                            <span style="font-family:'Dancing Script',cursive;font-size:22px;color:#f388ac;font-weight:bold;">bạch nguyệt ming</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-home-btn" style="text-decoration:none; display:inline-block; margin-top:20px; color:white; padding: 10px 20px; background: #ff69b4; border-radius: 20px;">Quay lại</a>
+    </div>
+
+    <audio id="myAudio" loop autoplay>
+        <source src="thienly.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        /* DANH SÁCH ẢNH BAY */
+        /* Bạn hãy chuẩn bị 10 ảnh và đặt tên từ anh1.jpg đến anh10.jpg */
+        const heartImages = [
+            "anh1.jpg", "anh2.jpg", "anh3.jpg", "anh4.jpg", "anh5.jpg",
+            "anh6.jpg", "anh7.jpg", "anh8.jpg", "anh9.jpg", "anh10.jpg"
+        ];
+
+        function createFireworks() {
+            const fireworks = document.getElementById('fireworks');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.top = Math.random() * 100 + '%';
+            firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            firework.style.boxShadow = `0 0 20px ${firework.style.backgroundColor}`;
+            fireworks.appendChild(firework);
+            setTimeout(() => firework.remove(), 2000);
+        }
+
+        function createImageScroll() {
+            const container = document.getElementById('heartImagesContainer');
+            const img = document.createElement('img');
+            const randomImage = heartImages[Math.floor(Math.random() * heartImages.length)];
+            img.src = randomImage;
+            img.className = 'heart-img-scroll';
+            
+            img.style.top = (Math.random() * 80 + 5) + 'vh';
+            const duration = 8 + Math.random() * 5;
+            img.style.animationDuration = duration + 's';
+            
+            const size = Math.floor(Math.random() * 100 + 150);
+            img.style.width = size + 'px';
+            img.style.height = size + 'px';
+            
+            container.appendChild(img);
+            setTimeout(() => img.remove(), duration * 1000);
+        }
+
+        setInterval(createFireworks, 300);
+        setInterval(createImageScroll, 2000);
+        
+        window.addEventListener('click', function() {
+            var audio = document.getElementById("myAudio");
+            if(audio) audio.play();
+        });
+    </script>
+</body>
+</html>
